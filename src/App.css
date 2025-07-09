@@ -1,0 +1,1497 @@
+/* App.css - Consolidated Styles for GameHive */
+
+/* ===== BASE RESET ===== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== ROOT VARIABLES ===== */
+:root {
+  --primary: #FF6B6B; /* Reddish Pink */
+  --secondary: #4ECDC4; /* Teal */
+  --accent: #FFE66D; /* Yellow */
+  --dark: #292F36; /* Dark Grey */
+  --light: #F7FFF7; /* Off-white */
+  --success: #6BCB77; /* Green */
+  --warning: #FFD166; /* Orange/Yellow */
+  --danger: #EF476F; /* Pinkish Red */
+
+  /* Spacing */
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-xxl: 3rem;
+
+  /* Borders */
+  --border-radius: 5px;
+  --border-radius-lg: 10px;
+  --border-radius-xl: 15px; /* Used for many rounded elements */
+  --border-radius-circle: 50%;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== BASE TYPOGRAPHY & GLOBAL STYLES ===== */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap');
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: var(--light); /* Default text color for the dark background */
+  overflow-x: hidden;
+  position: relative;
+  /* Hero Background from HTML */
+  background: url('./images/hero-bg.png') center/cover; /* Using heroBg image */
+  background-attachment: fixed; /* Keep background fixed */
+}
+
+.app { /* Main app wrapper to contain content over background */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1; /* Ensure app content is above hero background */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700; /* Roboto Bold */
+  line-height: 1.2;
+  margin-bottom: var(--space-md);
+  color: var(--light); /* Default heading color */
+}
+
+p {
+  margin-bottom: var(--space-md);
+}
+
+a {
+  text-decoration: none;
+  color: var(--secondary);
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--light);
+}
+
+/* Hero Background Overlays & Particles */
+.hero-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2; /* Behind everything */
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(41, 47, 54, 0.9), rgba(29, 38, 47, 0.8));
+}
+
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./images/hero-bg.png'); /* Using heroBg for particles */
+  background-repeat: repeat;
+  opacity: 0.1;
+  animation: stars 100s linear infinite;
+  z-index: -1; /* Between background and overlay */
+}
+
+@keyframes stars {
+  from { background-position: 0 0; }
+  to { background-position: -1000px 1000px; }
+}
+
+/* Container for main content */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== HEADER (Adapted from HTML) ===== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  margin-bottom: 30px;
+  background-color: rgba(41, 47, 54, 0.8);
+  border-radius: var(--border-radius-xl);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo {
+  height: 40px;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.logo:hover {
+  transform: rotate(15deg) scale(1.1);
+}
+
+.logo-text {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.2rem;
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(255, 230, 109, 0.5);
+  letter-spacing: 2px;
+}
+
+.search-bar {
+  display: flex;
+  flex-grow: 0.5;
+  margin: 0 20px;
+  position: relative;
+}
+
+.search-bar input {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 30px;
+  width: 100%;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.3s;
+  backdrop-filter: blur(5px);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.search-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.search-bar input:focus {
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
+}
+
+.search-bar button {
+  padding: 12px 20px;
+  background: linear-gradient(45deg, var(--primary), var(--danger));
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(239, 71, 111, 0.4);
+  display: flex; /* For centering icon */
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Match input height */
+}
+
+.search-bar button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(239, 71, 111, 0.6);
+}
+
+.search-bar button i { /* For Font Awesome icon */
+  font-size: 1rem;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  cursor: pointer; /* Make the whole section clickable for dropdown/modal */
+}
+
+.user-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--border-radius-circle);
+  object-fit: cover;
+  transition: all 0.3s;
+  border: 2px solid var(--accent);
+}
+
+.user-avatar img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(255, 230, 109, 0.5);
+}
+
+.username {
+  font-weight: 600;
+  color: var(--light);
+  transition: all 0.3s;
+}
+
+.username:hover {
+  color: var(--secondary);
+}
+
+/* Hero Banner (Adapted from HTML) */
+.hero-banner {
+  display: flex;
+  background: linear-gradient(135deg, rgba(239, 71, 111, 0.8), rgba(255, 107, 107, 0.8));
+  color: white;
+  padding: 60px 40px;
+  border-radius: var(--border-radius-xl);
+  margin-bottom: 40px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.8s ease-out;
+  box-shadow: 0 15px 35px rgba(239, 71, 111, 0.3);
+}
+
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+  animation: pulse 6s infinite;
+}
+
+.hero-content {
+  flex: 1;
+  z-index: 1;
+}
+
+.hero-content h1 {
+  margin-bottom: 15px;
+  font-size: 2.5rem;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  color: var(--light);
+  line-height: 1.2;
+}
+
+.hero-content p {
+  margin-bottom: 25px;
+  font-size: 1.2rem;
+  opacity: 0.9;
+  max-width: 500px;
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1;
+  position: relative;
+}
+
+.hero-image .character {
+  max-width: 300px;
+  height: auto;
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4));
+}
+
+.bubbles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.bubble:nth-child(1) {
+  width: 40px;
+  height: 40px;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.bubble:nth-child(2) {
+  width: 60px;
+  height: 60px;
+  left: 30%;
+  animation-delay: 2s;
+  animation-duration: 12s;
+}
+
+.bubble:nth-child(3) {
+  width: 30px;
+  height: 30px;
+  left: 60%;
+  animation-delay: 4s;
+  animation-duration: 18s;
+}
+
+@keyframes bubble-float {
+  0% {
+    bottom: -100px;
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(100px);
+  }
+  100% {
+    bottom: 100%;
+    transform: translateX(-100px);
+  }
+}
+
+/* ===== Buttons (Refined for consistency across app) ===== */
+.primary-btn {
+  background: linear-gradient(45deg, var(--accent), var(--warning));
+  color: var(--dark);
+  border: none;
+  padding: 15px 35px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(255, 214, 102, 0.4);
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.primary-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: 0.5s;
+}
+
+.primary-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 214, 102, 0.6);
+}
+
+.primary-btn:hover::before {
+  left: 100%;
+}
+
+.secondary-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--light);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 15px 35px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.secondary-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.danger-btn {
+  background: linear-gradient(45deg, var(--danger), var(--primary));
+  color: white;
+  border: none;
+  padding: 15px 35px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(239, 71, 111, 0.4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.danger-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(239, 71, 111, 0.6);
+}
+
+/* Game Section (Featured Games) */
+.game-section {
+  margin-bottom: 40px;
+  animation: fadeIn 1s ease-out;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  color: var(--light);
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 1px;
+}
+
+.section-title i {
+  color: var(--accent);
+}
+
+.game-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.game-card {
+  background-color: rgba(41, 47, 54, 0.6);
+  border-radius: var(--border-radius-xl);
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: all 0.4s;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary), var(--danger));
+}
+
+.game-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  border-color: rgba(239, 71, 111, 0.5);
+}
+
+.game-icon {
+  margin-bottom: 20px;
+  transition: transform 0.4s;
+}
+
+.game-icon img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: var(--border-radius-xl);
+  filter: drop-shadow(0 8px 15px rgba(0,0,0,0.3));
+}
+
+.game-card:hover .game-icon {
+  transform: rotate(5deg) scale(1.1);
+}
+
+.game-card h4 {
+  margin-bottom: 10px;
+  color: var(--light);
+  font-size: 1.3rem;
+}
+
+.game-card p {
+  color: var(--secondary);
+  font-size: 1rem;
+  margin-bottom: 20px;
+  min-height: 40px;
+}
+
+.play-btn {
+  background: linear-gradient(45deg, var(--primary), var(--danger));
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.4s;
+  opacity: 0;
+  transform: translateY(15px);
+  width: 80%;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(239, 71, 111, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.game-card:hover .play-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.play-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(239, 71, 111, 0.6);
+}
+
+/* Main Game Container (Welcome Message & Stats) */
+.game-container {
+  background-color: rgba(41, 47, 54, 0.8);
+  border-radius: var(--border-radius-xl);
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  min-height: 500px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  animation: fadeIn 1s ease-out;
+}
+
+.welcome-message {
+  text-align: center;
+  padding: 50px 0;
+  animation: fadeIn 1.5s ease-out;
+}
+
+.welcome-image {
+  max-width: 220px;
+  margin-bottom: 30px;
+  border-radius: var(--border-radius-xl);
+  filter: drop-shadow(0 8px 20px rgba(255, 107, 107, 0.5));
+  animation: pulse 2s infinite;
+}
+
+.welcome-message h2 {
+  margin-bottom: 20px;
+  color: var(--light);
+  font-size: 2.2rem;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.welcome-message p {
+  color: var(--secondary);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+  flex-wrap: wrap; /* Added for responsiveness */
+}
+
+.stat-box {
+  background-color: rgba(239, 71, 111, 0.2);
+  padding: 20px 30px;
+  border-radius: var(--border-radius-xl);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: var(--light);
+  border: 1px solid rgba(239, 71, 111, 0.3);
+  transition: all 0.4s;
+}
+
+.stat-box:hover {
+  background-color: rgba(239, 71, 111, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(239, 71, 111, 0.3);
+}
+
+.stat-box i {
+  font-size: 1.8rem;
+  color: var(--accent);
+}
+
+.stat-box span {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+/* Tic Tac Toe Game Styles */
+.tic-tac-toe-board { /* Renamed from .tictactoe-board for consistency */
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 10px;
+  margin: 0 auto 50px; /* Adjusted bottom margin */
+  width: fit-content;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: var(--border-radius-xl);
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.2);
+}
+
+.tic-tac-toe-cell { /* Renamed from .tictactoe-cell */
+  width: 100px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.tic-tac-toe-cell:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.tic-tac-toe-cell.x::before,
+.tic-tac-toe-cell.x::after {
+  content: "";
+  position: absolute;
+  width: 80%;
+  height: 10px;
+  background-color: var(--primary);
+  border-radius: 5px;
+}
+
+.tic-tac-toe-cell.x::before {
+  transform: rotate(45deg);
+}
+
+.tic-tac-toe-cell.x::after {
+  transform: rotate(-45deg);
+}
+
+.tic-tac-toe-cell.o::before {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 10px solid var(--secondary);
+  border-radius: 50%;
+}
+
+/* Whack a Mole Game Styles */
+.whackamole-container { /* Reusing existing class, adding specific styles */
+  background-color: rgba(41, 47, 54, 0.8); /* Dark background for game container */
+  /* Other styles like border-radius, padding, box-shadow are already in .game-container */
+}
+
+.mole-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 15px;
+  margin: 50px auto 20px; /* Adjusted top margin to 50px */
+  width: fit-content;
+  background-color: rgba(139, 69, 19, 0.3); /* Brownish background for mole grid */
+  padding: 20px;
+  border-radius: var(--border-radius-xl);
+}
+
+.mole-hole {
+  width: 100px;
+  height: 100px;
+  background-color: #8b4513; /* Brown for mole holes */
+  border-radius: var(--border-radius-circle);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+  transition: transform 0.2s;
+}
+
+.mole-hole:hover {
+  transform: scale(1.05);
+}
+
+.mole {
+  width: 80px;
+  height: 80px;
+  /* background-color: #5d4037; Removed as image is used */
+  border-radius: var(--border-radius-circle);
+  position: absolute;
+  bottom: -80px; /* Hidden below hole */
+  left: 10px;
+  transition: bottom 0.2s;
+  /* background-image: url('https://i.imgur.com/5v9gZyW.png'); Removed, using img tag */
+  background-size: cover;
+  background-position: center;
+}
+
+.mole.up {
+  bottom: 10px; /* Mole pops up */
+}
+
+.mole-img { /* Applied to the img tag inside .mole */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.hammer {
+  position: absolute;
+  width: 80px; /* Larger hammer */
+  height: 80px;
+  object-fit: contain;
+  z-index: 2;
+  transform-origin: bottom center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0); /* Initially hidden */
+  opacity: 0;
+  pointer-events: none; /* Do not block clicks */
+}
+
+.hammer.swing {
+  animation: hammerSwing 0.5s ease-out forwards;
+}
+
+/* Rock Paper Scissors Game Styles */
+.rps-container { /* Reusing existing class, adding specific styles */
+  background-color: rgba(41, 47, 54, 0.8); /* Dark background for game container */
+}
+
+.rps-choices {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px; /* Added margin-top to create space from buttons */
+  margin-bottom: 50px; /* Adjusted bottom margin */
+  flex-wrap: wrap;
+}
+
+.rps-choice {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--border-radius-circle);
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  flex-direction: column; /* For text below image */
+  gap: 10px;
+  color: var(--light);
+  font-weight: bold;
+}
+
+.rps-choice:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(255, 230, 109, 0.5);
+}
+
+/* Background images for RPS choices using data-attributes */
+.rps-choice[data-choice="rock"] {
+  background-image: url('./images/rock.jpg');
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.rps-choice[data-choice="paper"] {
+  background-image: url('./images/paper.jpg');
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.rps-choice[data-choice="scissors"] {
+  background-image: url('./images/scissors.jpg');
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.rps-result {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(41, 47, 54, 0.7);
+  padding: 20px;
+  border-radius: var(--border-radius-xl);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.rps-player, .rps-computer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.rps-player h3, .rps-computer h3 {
+  color: var(--light);
+}
+
+.rps-selection {
+  width: 120px;
+  height: 120px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Background images for RPS selections using data-attributes */
+.rps-selection[data-choice="rock"] { background-image: url('./images/rock.jpg'); }
+.rps-selection[data-choice="paper"] { background-image: url('./images/paper.jpg'); }
+.rps-selection[data-choice="scissors"] { background-image: url('./images/scissors.jpg'); }
+
+
+.rps-scores { /* Renamed from .game-stats for RPS specific */
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.rps-scores div {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 10px 20px;
+  border-radius: 10px;
+  min-width: 120px;
+  text-align: center;
+}
+
+.rps-scores span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+/* Footer (Adapted from HTML) */
+footer {
+  background-color: rgba(41, 47, 54, 0.95);
+  border-radius: 15px 15px 0 0;
+  padding: 50px 0 20px;
+  margin-top: 50px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  animation: fadeInUp 1s ease-out;
+  color: var(--light); /* Default footer text color */
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.social-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--border-radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.social-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--primary), var(--danger)); /* Default gradient */
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.social-btn:hover {
+  transform: translateY(-8px) rotate(10deg);
+  box-shadow: 0 10px 25px rgba(239, 71, 111, 0.5);
+}
+
+.social-btn:hover::before {
+  transform: scale(1.1);
+}
+
+/* Specific social button colors */
+.twitter::before { background: #1DA1F2; }
+.instagram::before { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.facebook::before { background: #3b5998; }
+.youtube::before { background: #FF0000; }
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: var(--secondary);
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  position: relative;
+  padding: 5px 0;
+}
+
+.footer-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent);
+  transition: width 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--light);
+}
+
+.footer-links a:hover::after {
+  width: 100%;
+}
+
+.footer-info {
+  text-align: center;
+  color: var(--secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.footer-info i {
+  color: var(--danger);
+}
+
+/* Notification (from your previous code, kept for consistency) */
+.notification {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: var(--dark);
+  color: white;
+  padding: 18px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  transform: translateX(150%);
+  transition: transform 0.4s ease-out;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-left: 5px solid var(--primary);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 350px;
+}
+
+.notification.show {
+  transform: translateX(0);
+}
+
+.notification i {
+  font-size: 1.5rem;
+}
+
+.notification.success {
+  border-left-color: var(--success);
+}
+
+.notification.error {
+  border-left-color: var(--danger);
+}
+
+.notification.warning {
+  border-left-color: var(--warning);
+}
+
+/* Animations (from your previous code and HTML CSS) */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes hammerSwing {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(0); opacity: 0; }
+  20% { transform: translate(-50%, -50%) rotate(-10deg) scale(1); opacity: 1; }
+  50% { transform: translate(-50%, -50%) rotate(-45deg) scale(1.1); opacity: 1; }
+  80% { transform: translate(-50%, -50%) rotate(-10deg) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) rotate(0deg) scale(0); opacity: 0; }
+}
+
+@keyframes pop-in {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background-color: var(--dark);
+  padding: 40px;
+  border-radius: var(--border-radius-xl);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: pop-in 0.3s ease-out forwards;
+}
+
+.modal-content h2 {
+  color: var(--accent);
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.modal-content p {
+  color: var(--light);
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal-content label {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  color: var(--secondary);
+  font-weight: bold;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="password"] {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--light);
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.modal-content input[type="text"]:focus,
+.modal-content input[type="password"]:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+}
+
+.modal-content .message {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.modal-content .message.success {
+  color: var(--success);
+}
+
+.modal-content .message.error {
+  color: var(--danger);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+/* Game Specific Styles */
+.game-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.game-title {
+  font-size: 2.5rem;
+  color: var(--light);
+  text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  margin-bottom: 10px;
+}
+
+.game-message {
+  font-size: 1.2rem;
+  color: var(--secondary);
+}
+
+.game-stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.game-controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 50px; /* This was already updated to 50px in previous turn */
+  flex-wrap: wrap;
+}
+
+/* Tic Tac Toe Symbol Selection */
+.symbol-selection {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.symbol-selection h3 {
+  color: var(--accent);
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.symbol-options {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.symbol-options button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 30px;
+  border-radius: var(--border-radius-xl);
+  font-size: 1.2rem;
+}
+
+.symbol-options button img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+}
+
+/* RPS Result Display */
+.rps-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 30px;
+  background-color: rgba(41, 47, 54, 0.7);
+  padding: 20px;
+  border-radius: var(--border-radius-xl);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.rps-result .vs {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2rem;
+  color: var(--primary);
+  text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+}
+
+/* Responsive Styles (Combined and adjusted) */
+@media (max-width: 1200px) {
+  .container {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 30px;
+  }
+
+  .hero-content {
+    margin-bottom: 30px;
+  }
+
+  .hero-image {
+    justify-content: center;
+  }
+
+  .hero-image .character {
+    max-width: 250px;
+  }
+
+  .game-cards {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .logo-container {
+    margin-bottom: 10px;
+  }
+
+  .search-bar {
+    width: 100%;
+    margin: 15px 0;
+    max-width: 100%; /* Ensure it takes full width on small screens */
+  }
+
+  .user-section {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .game-cards {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .welcome-message h2 {
+    font-size: 2rem;
+  }
+
+  .stats {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .tic-tac-toe-board,
+  .mole-grid { /* Combined whack-a-mole-board to mole-grid */
+    grid-template-columns: repeat(3, 80px);
+    grid-template-rows: repeat(3, 80px);
+    gap: 10px; /* Adjusted gap */
+  }
+
+  .mole-hole, .tic-tac-toe-cell {
+    width: 80px;
+    height: 80px;
+  }
+
+  .mole-img, .hammer { /* Adjusted for smaller cell size */
+    width: 60px;
+    height: 60px;
+  }
+
+  .tic-tac-toe-cell.x::before, .tic-tac-toe-cell.x::after {
+    height: 8px; /* Thinner X */
+  }
+
+  .tic-tac-toe-cell.o::before {
+    width: 45px; /* Smaller O */
+    height: 45px;
+    border-width: 8px; /* Thinner O border */
+  }
+
+  .rps-choices {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .rps-choice {
+    width: 100px; /* Smaller RPS choices */
+    height: 100px;
+  }
+
+  .rps-choice[data-choice="rock"],
+  .rps-choice[data-choice="paper"],
+  .rps-choice[data-choice="scissors"] {
+    background-size: 50%; /* Adjust background image size */
+  }
+
+  .rps-selection {
+    width: 100px; /* Smaller RPS selection */
+    height: 100px;
+  }
+
+  .rps-selection[data-choice="rock"],
+  .rps-selection[data-choice="paper"],
+  .rps-selection[data-choice="scissors"] {
+    background-size: 50%; /* Adjust background image size */
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .modal-content {
+    padding: 30px;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .modal-buttons button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+  .hero-content p {
+    font-size: 1rem;
+  }
+  .primary-btn, .secondary-btn, .danger-btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+  .section-title {
+    font-size: 1.5rem;
+  }
+  .game-cards {
+    grid-template-columns: 1fr; /* Single column on very small screens */
+  }
+  .stat-box {
+    width: 100%;
+    max-width: 250px; /* Limit width for stacking */
+  }
+  .tic-tac-toe-board,
+  .mole-grid {
+    grid-template-columns: repeat(3, 70px);
+    grid-template-rows: repeat(3, 70px);
+    gap: 8px;
+  }
+  .mole-hole, .tic-tac-toe-cell {
+    width: 70px;
+    height: 70px;
+  }
+  .mole-img, .hammer {
+    width: 50px;
+    height: 50px;
+  }
+  .tic-tac-toe-cell.x::before, .tic-tac-toe-cell.x::after {
+    height: 6px;
+  }
+  .tic-tac-toe-cell.o::before {
+    width: 35px;
+    height: 35px;
+    border-width: 6px;
+  }
+  .rps-result .vs {
+    font-size: 1.5rem;
+  }
+}
